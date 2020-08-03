@@ -22,7 +22,7 @@ namespace MoviePriceTrackerRestAPI.Controllers
         public MovieDetails GetMovieDetails(int movieId)
         {
             //string movieDbUrl = "https://api.themoviedb.org/3/movie/{0}?api_key={1}";
-            //string apiKey = "8f75bbc25b1c0ad27a1f06f54bd64c7f";
+            //string apiKey = "";
             //movieDbUrl = String.Format(movieDbUrl, movieId.ToString(), apiKey);
 
             // httpclient
