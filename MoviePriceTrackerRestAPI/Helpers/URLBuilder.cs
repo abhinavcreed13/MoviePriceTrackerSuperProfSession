@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.SessionState;
 
 namespace MoviePriceTrackerRestAPI.Helpers
@@ -20,6 +21,12 @@ namespace MoviePriceTrackerRestAPI.Helpers
             detailsUrl = string.Format(baseURL, detailsUrl, apiKey);
 
             return detailsUrl;
+        }
+
+        public static string GetFullPosterPath(string url)
+        {
+            var baseUrl = ConfigurationManager.AppSettings["movieDBposterPathBaseUrl"].ToString();
+            return string.Format(baseUrl, url);
         }
     }
 }

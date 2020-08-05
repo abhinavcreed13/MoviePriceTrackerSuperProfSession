@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MoviePriceTrackerRestAPI.Models
+namespace MoviePriceTrackerWebClient.Models
 {
-    public class MovieDetails
+    public class MovieDetailsViewModel
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -21,6 +22,7 @@ namespace MoviePriceTrackerRestAPI.Models
         public double Popularity { get; set; }
 
         [JsonProperty("poster_path")]
+        [Display(Name = "Poster")]
         public string PosterPath { get; set; }
     }
 }

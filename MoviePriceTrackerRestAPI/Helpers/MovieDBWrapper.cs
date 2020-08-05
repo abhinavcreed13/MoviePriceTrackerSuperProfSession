@@ -15,6 +15,10 @@ namespace MoviePriceTrackerRestAPI.Helpers
 
             var response = client.Execute<MovieDetails>(new RestRequest());
 
+            var data = response.Data;
+
+            data.PosterPath = URLBuilder.GetFullPosterPath(data.PosterPath);
+
             return response.Data;
         }
     }
