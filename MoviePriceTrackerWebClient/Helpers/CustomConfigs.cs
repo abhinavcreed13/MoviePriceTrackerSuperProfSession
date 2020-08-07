@@ -10,6 +10,7 @@ namespace MoviePriceTrackerWebClient.Helpers
     {
         public static string MovieBaseUrl = null;
         public static string DetailsUrl = null;
+        public static string SearchUrl = null;
 
         public static void Initilize()
         {
@@ -25,6 +26,10 @@ namespace MoviePriceTrackerWebClient.Helpers
 
                     case "detailsUrl":
                         DetailsUrl = apiUrl.Value;
+                        break;
+
+                    case "searchUrl":
+                        SearchUrl = apiUrl.Value;
                         break;
                 }
             }

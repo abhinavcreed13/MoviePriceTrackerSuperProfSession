@@ -21,5 +21,21 @@ namespace MoviePriceTrackerRestAPI.Helpers
 
             return response.Data;
         }
+
+        public static MovieSearch SearchMovie(string keyword)
+        {
+            var client = new RestClient(URLBuilder.GetMovieSearchUrl(keyword));
+
+            var response = client.Execute<MovieSearch>(new RestRequest());
+
+            var data = response.Data;
+
+            foreach (MovieDetails d in data.Results)
+            {
+                d.PosterPath = URLBuilder.GetFullPosterPath(d.PosterPath);
+            }
+
+            return data;
+        }
     }
 }

@@ -37,5 +37,12 @@ namespace MoviePriceTrackerRestAPI.Controllers
             //Restsharp
             return MovieDBWrapper.GetMovieDetails(movieId);
         }
+
+        [HttpPost]
+        [Route("api/moviedb/searchmovie")]
+        public MovieSearch SearchMovie(MovieSearchParameter param)
+        {
+            return MovieDBWrapper.SearchMovie(param.Query);
+        }
     }
 }

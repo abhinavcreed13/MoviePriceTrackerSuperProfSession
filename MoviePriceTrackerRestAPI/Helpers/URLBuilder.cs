@@ -28,5 +28,15 @@ namespace MoviePriceTrackerRestAPI.Helpers
             var baseUrl = ConfigurationManager.AppSettings["movieDBposterPathBaseUrl"].ToString();
             return string.Format(baseUrl, url);
         }
+
+        public static string GetMovieSearchUrl(string keyword)
+        {
+            var searchUrl = ConfigurationManager.AppSettings["movieSearchUrl"].ToString();
+            searchUrl = string.Format(baseURL, searchUrl, apiKey);
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString.Add("query", keyword);
+            searchUrl += "&" + queryString.ToString();
+            return searchUrl;
+        }
     }
 }
