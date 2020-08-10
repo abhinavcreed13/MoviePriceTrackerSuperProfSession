@@ -15,6 +15,7 @@ namespace MoviePriceTrackerWebClient.Controllers
         public ActionResult Index()
         {
             // hit my details api
+            /*
             string baseUrl = CustomConfigs.MovieBaseUrl;
             string searchUrl = CustomConfigs.SearchUrl;
             searchUrl = string.Format(baseUrl, searchUrl.ToString());
@@ -33,6 +34,31 @@ namespace MoviePriceTrackerWebClient.Controllers
             var viewModel = client.Execute<MovieSearchModel>(request);
 
             return View(viewModel.Data.Results);
+            */
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(string searchbox)
+        {
+            string baseUrl = CustomConfigs.MovieBaseUrl;
+            string searchUrl = CustomConfigs.SearchUrl;
+            searchUrl = string.Format(baseUrl, searchUrl.ToString());
+
+            var client = new RestClient(searchUrl);
+            var request = new RestRequest(Method.POST);
+
+            // kind of json (object format)
+            var data = new
+            {
+                query = searchbox
+            };
+
+            request.AddJsonBody(data);
+
+            var viewModel = client.Execute<MovieSearchModel>(request);
+
+            return View("SearchList", viewModel.Data.Results);
         }
 
         // GET: Movie/Details/5

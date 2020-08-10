@@ -1,0 +1,11 @@
+﻿<h2>Search Movie</h2>
+
+<div class="search">
+    @using (Html.BeginForm("Index", "Movie", FormMethod.Post))
+    {
+        <input name="searchbox" type="text" class="form-control"
+                style="display:inline-block;"/>
+        <input type="submit" value="Search" class="btn btn-primary"
+               style="display:inline-block;"/>
+    }
+</div>

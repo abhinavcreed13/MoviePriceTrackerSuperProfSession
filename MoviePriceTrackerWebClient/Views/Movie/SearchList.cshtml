@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MoviePriceTrackerWebClient.Models.MovieDetailsViewModel>
+
+@{
+    ViewBag.Title = "Search Results";
+}
+
+@Html.Partial("SearchBox")
+
+<h2>Search Results</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PosterPath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Overview)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Popularity)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@item.PosterPath" style="width:80px;height:120px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td width="650">
+                @Html.DisplayFor(modelItem => item.Overview)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Popularity)
+            </td>
+            <td>
+                <button class="btn btn-primary" onclick="trackMovie(this,@item.Id)">Track Price</button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    <script type="text/javascript">
+        function trackMovie(btn, movieId) {
+            console.log(movieId);
+            console.log(btn);
+            var $btn = $(btn);
+            // change color + text (!!dynamically!!)
+            if ($btn.hasClass('btn-primary')) {
+                $(btn).text('Tracking!');
+                $(btn).removeClass('btn-primary').addClass('btn-success');
+            }
+            else {
+                $(btn).text('Track Price');
+                $(btn).removeClass('btn-success').addClass('btn-primary');
+            }
+        }
+    </script>
+}
+
