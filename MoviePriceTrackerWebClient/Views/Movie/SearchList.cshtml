@@ -56,12 +56,33 @@
             var $btn = $(btn);
             // change color + text (!!dynamically!!)
             if ($btn.hasClass('btn-primary')) {
-                $(btn).text('Tracking!');
-                $(btn).removeClass('btn-primary').addClass('btn-success');
+                // ajax post call - add tracking id on server
+                $.post("http://localhost:52450/api/movieapi/trackmovie",
+                    {
+                        "movieId": movieId
+                    },
+                    function (response) {
+                        console.log(response);
+                        $(btn).text('Tracking!');
+                        $(btn).removeClass('btn-primary').addClass('btn-success');
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
             }
             else {
-                $(btn).text('Track Price');
-                $(btn).removeClass('btn-success').addClass('btn-primary');
+                // ajax post call - remove tracking id on server
+                $.post("http://localhost:52450/api/movieapi/removetracking",
+                    {
+                        "movieId": movieId
+                    },
+                    function (response) {
+                        console.log(response);
+                        $(btn).text('Track Price');
+                        $(btn).removeClass('btn-success').addClass('btn-primary');
+                    }
+                );
             }
         }
     </script>
