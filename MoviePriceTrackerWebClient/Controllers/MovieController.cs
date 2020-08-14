@@ -58,7 +58,16 @@ namespace MoviePriceTrackerWebClient.Controllers
 
             var viewModel = client.Execute<MovieSearchModel>(request);
 
-            return View("SearchList", viewModel.Data.Results);
+            var resData = viewModel.Data.Results;
+
+            // checking if it is already being tracked
+            foreach(MovieDetailsViewModel movieObject in resData)
+            {
+                movieObject.IsTracking = MovieTrackingController.TrackingMovieIds
+                                            .Any(trackingId => trackingId == movieObject.Id);
+            }
+
+            return View("SearchList", resData);
         }
 
         // GET: Movie/Details/5

@@ -41,7 +41,14 @@
                 @Html.DisplayFor(modelItem => item.Popularity)
             </td>
             <td>
-                <button class="btn btn-primary" onclick="trackMovie(this,@item.Id)">Track Price</button>
+                @if (item.IsTracking)
+                {
+                    <button class="btn btn-success" onclick="trackMovie(this,@item.Id)">Tracking</button>
+                }
+                else
+                {
+                    <button class="btn btn-primary" onclick="trackMovie(this,@item.Id)">Track Price</button>
+                }
             </td>
         </tr>
     }
@@ -57,32 +64,35 @@
             // change color + text (!!dynamically!!)
             if ($btn.hasClass('btn-primary')) {
                 // ajax post call - add tracking id on server
-                $.post("http://localhost:52450/api/movieapi/trackmovie",
-                    {
-                        "movieId": movieId
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:52450/api/movieapi/trackmovie",
+                    data: {
+                        movieId: movieId
                     },
-                    function (response) {
+                    dataType: 'json',
+                    success: function (response) {
                         console.log(response);
                         $(btn).text('Tracking!');
                         $(btn).removeClass('btn-primary').addClass('btn-success');
-                    },
-                    function (error) {
-                        console.log(error);
                     }
-                );
+                });
             }
             else {
                 // ajax post call - remove tracking id on server
-                $.post("http://localhost:52450/api/movieapi/removetracking",
-                    {
-                        "movieId": movieId
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:52450/api/movieapi/removetracking",
+                    data: {
+                        movieId: movieId
                     },
-                    function (response) {
+                    dataType: 'json',
+                    success: function (response) {
                         console.log(response);
                         $(btn).text('Track Price');
                         $(btn).removeClass('btn-success').addClass('btn-primary');
                     }
-                );
+                });
             }
         }
     </script>

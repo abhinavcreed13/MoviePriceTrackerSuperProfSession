@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MoviePriceTrackerWebClient.Helpers;
+using MoviePriceTrackerWebClient.Models;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +17,23 @@ namespace MoviePriceTrackerWebClient.Controllers
         // GET: MovieTracking
         public ActionResult Index()
         {
-            return View();
+            List<MovieDetailsViewModel> movieDetails = new List<MovieDetailsViewModel>();
+
+            foreach (int movieId in TrackingMovieIds)
+            {
+                string baseUrl = CustomConfigs.MovieBaseUrl;
+                string movieDetailsURL = CustomConfigs.DetailsUrl;
+                movieDetailsURL = string.Format(movieDetailsURL, movieId.ToString());
+                movieDetailsURL = string.Format(baseUrl, movieDetailsURL);
+
+                var client = new RestClient(movieDetailsURL);
+
+                // GET request
+                var viewModel = client.Execute<MovieDetailsViewModel>(new RestRequest());
+                movieDetails.Add(viewModel.Data);
+            }
+
+            return View(movieDetails);
         }
 
         // GET: MovieTracking/Details/5
@@ -68,9 +87,10 @@ namespace MoviePriceTrackerWebClient.Controllers
         }
 
         // GET: MovieTracking/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Remove(int id)
         {
-            return View();
+            TrackingMovieIds.Remove(id);
+            return RedirectToAction("Index");
         }
 
         // POST: MovieTracking/Delete/5

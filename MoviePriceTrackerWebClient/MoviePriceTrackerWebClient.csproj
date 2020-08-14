@@ -186,10 +186,10 @@
     <Content Include="Views\Movie\Index.cshtml" />
     <Content Include="Views\Movie\SearchBox.cshtml" />
     <Content Include="Views\Movie\SearchList.cshtml" />
+    <Content Include="Views\MovieTracking\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\MovieTracking\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

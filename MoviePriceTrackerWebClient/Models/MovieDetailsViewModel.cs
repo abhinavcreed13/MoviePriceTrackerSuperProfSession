@@ -24,5 +24,9 @@ namespace MoviePriceTrackerWebClient.Models
         [JsonProperty("poster_path")]
         [Display(Name = "Poster")]
         public string PosterPath { get; set; }
+
+        public int Price { get; set; }
+
+        public bool IsTracking { get; set; }
     }
 }
